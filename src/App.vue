@@ -1,17 +1,60 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1>JUOMAPeli</h1>
+    <template v-if="cards.length == 0">
+      <Loader />
+      <p>Loading</p>
+    </template>
+    <template v-else>
+      <CardsList :cards="cards" />
+    </template>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import storage from './firebase';
+
+import CardsList from './components/CardsList';
+import Loader from './components/Loader';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    CardsList,
+    Loader
+  },
+  data() {
+    return {
+      cards: [],
+    }
+  },
+  mounted() {
+    const newCards = [];
+
+    async function generateCardItem(cardRef) {
+      const src = await cardRef.getDownloadURL();
+      const meta = await cardRef.getMetadata();
+      console.log(meta)
+      newCards.push({
+        src,
+        meta
+      });
+    }
+
+    const cardFaces = storage.ref('card-faces');
+
+    cardFaces.listAll()
+      .then(res => {
+        res.items.forEach(itemRef => {
+          generateCardItem(itemRef);
+        });
+      })
+      .catch(error => {
+        this.cardFetchError = true;
+        console.log(error);
+      });
+
+    this.cards = newCards;
   }
 }
 </script>
@@ -24,5 +67,9 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+
+  * {
+    box-sizing: border-box;
+  }
 }
 </style>
