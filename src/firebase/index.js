@@ -8,7 +8,6 @@ const firebaseConfig = {
   databaseURL: process.env.VUE_APP_FIREBASE_DB_URL,
   messagingSenderId: process.env.VUE_APP_FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.VUE_APP_FIREBASE_APP_ID
-
 };
 
 firebase.initializeApp(firebaseConfig);
