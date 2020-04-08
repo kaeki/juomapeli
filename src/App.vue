@@ -1,28 +1,18 @@
 <template>
   <div id="app">
-    <h1>JUOMAPeli</h1>
-    <template v-if="cards.length == 0">
-      <Loader />
-      <p>Loading</p>
-    </template>
-    <template v-else>
-      <CardsList :cards="cards" />
-    </template>
+    <div id="nav">
+      <router-link to="/">Home</router-link> |
+      <router-link to="/cards">About</router-link>
+    </div>
+    <router-view/>
   </div>
 </template>
 
 <script>
 import storage from './firebase';
 
-import CardsList from './components/CardsList';
-import Loader from './components/Loader';
-
 export default {
   name: 'App',
-  components: {
-    CardsList,
-    Loader
-  },
   data() {
     return {
       cards: [],
@@ -66,10 +56,18 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
 
-  * {
-    box-sizing: border-box;
+#nav {
+  padding: 30px;
+
+  a {
+    font-weight: bold;
+    color: #2c3e50;
+
+    &.router-link-exact-active {
+      color: #42b983;
+    }
   }
 }
 </style>
