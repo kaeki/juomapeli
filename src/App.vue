@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/cards">All cards</router-link>
+      <router-link to="/">Juomapelin perkele</router-link> |
+      <router-link to="/kaikki-kortit">Selaa kortteja</router-link>
     </div>
     <router-view/>
   </div>
@@ -40,4 +40,15 @@ export default {
     }
   }
 }
+
+.vis-hidden {
+    position: absolute !important;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+    clip: rect(1px, 1px, 1px, 1px);
+    white-space: nowrap; /* added line */
+}
+
 </style>

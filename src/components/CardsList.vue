@@ -2,13 +2,7 @@
   <ul>
     <li v-for="card in cards" :key="card.meta.generation">
       <div class="card">
-        <div class="card__image-wrapper">
-          <img :data-src="card.src" :alt="card.meta.name" v-lazyload>
-        </div>
-        <div class="card__description">
-          <p><b>Nimi:</b> {{card.meta.name}}</p>
-          <p><b>Päiväys:</b> {{new Date(card.meta.updated).toLocaleDateString('fi-FI')}}</p>
-        </div>
+        <img :data-src="card.src" :alt="card.meta.name" v-lazyload>
       </div>
     </li>
   </ul>
@@ -48,21 +42,21 @@ ul {
   }
 
   .card {
-    border: 2px solid lightgray;
+    position: relative;
+    border-radius: 12px;
+    background-color: black;
+    overflow: hidden;
+    height: 0;
+    padding-bottom: 145%;
 
-    &__image-wrapper {
-      img {
-        background-color: black;
-        max-width: 100%;
-      }
-    }
-
-    &__description {
-      margin: 1rem;
-
-      p {
-        text-align: left;
-      }
+    img {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      margin: auto;
+      max-width: 100%;
     }
   }
 }

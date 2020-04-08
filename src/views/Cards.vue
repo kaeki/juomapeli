@@ -1,6 +1,7 @@
 <template>
   <div class="cards">
-    <h1>All cards</h1>
+    <h1>Kaikki kortit</h1>
+    <p>Kortteja löytyy tällä hetkellä kaikkineen {{state.cards.length}} kappaletta</p>
     <template v-if="state.cards.length > 0 && !state.cardsError">
       <CardsList :cards="state.cards" />
     </template>
