@@ -3,7 +3,7 @@
     <li v-for="card in cards" :key="card.meta.generation">
       <div class="card">
         <div class="card__image-wrapper">
-          <img :src="card.src" :alt="card.meta.name">
+          <img :data-src="card.src" :alt="card.meta.name" v-lazyload>
         </div>
         <div class="card__description">
           <p><b>Nimi:</b> {{card.meta.name}}</p>
