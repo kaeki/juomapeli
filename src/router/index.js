@@ -4,29 +4,50 @@ import Home from '@/views/Home.vue'
 
 Vue.use(VueRouter)
 
-  const routes = [
-    {
-      path: '/',
-      name: 'Juomapeli',
-      component: Home
-    }, {
-      path: '/kaikki-kortit',
-      name: 'Kaikki kortit',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ '@/views/Cards.vue')
-    }, {
-      path: '*',
-      name: 'Huppista',
-      component: () => import(/* webpackChunkName: "about" */ '@/views/404.vue')
+const routes = [
+  {
+    path: '/',
+    name: 'Juomapeli',
+    component: Home,
+    meta: {
+      title: 'Juomapeli',
+      metaTags: [
+        {
+          name: 'description',
+          content: 'Oikein hieno korttipeli'
+        },
+        {
+          property: 'og:description',
+          content: 'Oikein hieno korttipeli'
+        }
+      ]
     }
-  ]
+  }, {
+    path: '/kaikki-kortit',
+    name: 'Kaikki kortit',
+    meta: {
+      title: 'Kaikki kortit | Juomapeli',
+    },
+    component: () => import(/* webpackChunkName: "about" */ '@/views/Cards.vue')
+  }, {
+    path: '*',
+    name: 'Huppista',
+    meta: {
+      title: 'Huppista | Juomapeli',
+    },
+    component: () => import(/* webpackChunkName: "about" */ '@/views/404.vue')
+  }
+];
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
-})
+});
 
-export default router
+router.beforeEach((to, from, next) => {
+  document.title = to.meta.title || 'Juomapeli';
+  next()
+});
+
+export default router;
