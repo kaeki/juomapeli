@@ -2,49 +2,19 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/cards">About</router-link>
+      <router-link to="/cards">All cards</router-link>
     </div>
     <router-view/>
   </div>
 </template>
 
 <script>
-import storage from './firebase';
+import store from '@/store';
 
 export default {
   name: 'App',
-  data() {
-    return {
-      cards: [],
-    }
-  },
   mounted() {
-    const newCards = [];
-
-    async function generateCardItem(cardRef) {
-      const src = await cardRef.getDownloadURL();
-      const meta = await cardRef.getMetadata();
-      console.log(meta)
-      newCards.push({
-        src,
-        meta
-      });
-    }
-
-    const cardFaces = storage.ref('card-faces');
-
-    cardFaces.listAll()
-      .then(res => {
-        res.items.forEach(itemRef => {
-          generateCardItem(itemRef);
-        });
-      })
-      .catch(error => {
-        this.cardFetchError = true;
-        console.log(error);
-      });
-
-    this.cards = newCards;
+    store.fetchCards();
   }
 }
 </script>
