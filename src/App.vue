@@ -5,14 +5,19 @@
       <router-link to="/kaikki-kortit">Selaa kortteja</router-link>
     </div>
     <router-view/>
+    <BackToTopButton />
   </div>
 </template>
 
 <script>
 import store from '@/store';
+import BackToTopButton from '@/components/BackToTopButton';
 
 export default {
   name: 'App',
+  components: {
+    BackToTopButton
+  },
   mounted() {
     store.fetchCards();
   }
@@ -20,12 +25,22 @@ export default {
 </script>
 
 <style lang="scss">
+:root {
+  --accent: #42b983;
+  --accent-dark: #2c3e50;
+  --text: #2c3e50;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: var(--text);
 }
 
 #nav {
@@ -33,10 +48,10 @@ export default {
 
   a {
     font-weight: bold;
-    color: #2c3e50;
+    color: var(--accent-dark);
 
     &.router-link-exact-active {
-      color: #42b983;
+      color: var(--accent);
     }
   }
 }
