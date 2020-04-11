@@ -4,6 +4,7 @@
       <div class="info__box">
         <button v-if="sharedCards.length > 0"
           class="button"
+          title=""
           @click="shuffle">
           Uusi peli
         </button>
@@ -13,7 +14,11 @@
       </div>
     </div>
     <div v-if="shuffledCards.length > 0" class="game">
-      <button class="share-card-button" @click="shareCard">
+      <button
+        v-if="sharedCards.length !== cards.length"
+        class="share-card-button"
+        title="Jaa uusi kortti"
+        @click="shareCard">
         <Card :back="cardBack" />
       </button>
       <CardFlippingAnimation>
