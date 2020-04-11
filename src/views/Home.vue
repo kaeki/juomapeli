@@ -1,12 +1,16 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
+    <CardGame />
   </div>
 </template>
 
 <script>
+import CardGame from '@/components/CardGame';
 
 export default {
-  name: 'Home'
+  name: 'Home',
+  components: {
+    CardGame
+  }
 }
 </script>
