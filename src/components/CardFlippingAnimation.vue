@@ -11,6 +11,12 @@
 
 <script>
 export default {
+  props: {
+    fadeOut: {
+      type: Boolean,
+      default: false
+    }
+  },
   methods: {
     randomMax(max) {
       const random = Math.floor(Math.random() * max);
@@ -29,8 +35,12 @@ export default {
       el.style.transform = `rotateY(180deg) rotateZ(${z}deg) translateY(${top}px)`;
     },
     leave(el) {
-      el.style.left = 0;
-      el.style.transform = `rotateY(0) rotateZ(0deg) translateY(0px)`;
+      if (this.fadeOut) {
+        el.style.opacity = 0;
+      } else {
+        el.style.left = 0;
+        el.style.transform = `rotateY(0) rotateZ(0deg) translateY(0px)`;
+      }
     }
   }
 }

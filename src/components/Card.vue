@@ -1,10 +1,12 @@
 <template>
   <div class="card">
     <div class="card__face card__face--back">
-      <img :data-src="back.src" :alt="alts ? back.meta.name : null" v-lazyload>
+      <img v-if="lazyload" :data-src="back.src" :alt="alts ? back.meta.name : null" v-lazyload>
+      <img v-else :src="back.src" :alt="alts ? back.meta.name : null">
     </div>
     <div v-if="face" class="card__face card__face--front">
-      <img :data-src="face.src" :alt="alts ? face.meta.name : null" v-lazyload>>
+      <img v-if="lazyload" :data-src="face.src" :alt="alts ? face.meta.name : null" v-lazyload>
+      <img v-else :src="face.src" :alt="alts ? face.meta.name : null">
     </div>
   </div>
 </template>
@@ -22,6 +24,10 @@ export default {
     alts: {
       type: Boolean,
       default: false
+    },
+    lazyload: {
+      type: Boolean,
+      default: true
     }
   }
 }

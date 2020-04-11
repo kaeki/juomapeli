@@ -10,7 +10,7 @@
         </button>
       </div>
       <div class="info__box">
-        <p>{{sharedCards.length}}/{{cards.length}}</p>
+        <p>{{nextCardIndex}}/{{cards.length}}</p>
       </div>
     </div>
     <div v-if="shuffledCards.length > 0" class="game">
@@ -19,16 +19,17 @@
         class="share-card-button"
         title="Jaa uusi kortti"
         @click="shareCard">
-        <Card :back="cardBack" />
+        <Card :back="cardBack" :lazyload="false"/>
       </button>
-      <CardFlippingAnimation>
+      <CardFlippingAnimation :fadeOut="cardFadeOut">
         <Card
           v-for="(card, index) in sharedCards"
           class="shared-card"
           :key="card.meta.generation"
           :face="card"
           :back="cardBack"
-          :style="{ 'z-index': index }"/>
+          :lazyload="false"
+          :style="{ 'z-index': index + 1 }"/>
       </CardFlippingAnimation>
     </div>
   </div>
@@ -57,7 +58,8 @@ export default {
     return {
       shuffledCards: [],
       sharedCards: [],
-      nextCardIndex: 0
+      nextCardIndex: 0,
+      cardFadeOut: false
     }
   },
   methods: {
@@ -69,13 +71,18 @@ export default {
           [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
       }
       
+      this.cardFadeOut = false;
       this.sharedCards = [];
       this.nextCardIndex = 0;
       this.shuffledCards = shuffled;
+
+      setTimeout(() => this.cardFadeOut = true, 1000);
     },
     shareCard() {
       const newCard = this.cards[this.nextCardIndex];
-      this.sharedCards.push(newCard);
+      const lastTenCards = this.sharedCards.slice(Math.max(this.sharedCards.length - 9, 0));
+
+      this.sharedCards = [...lastTenCards, newCard];
       this.nextCardIndex = this.nextCardIndex + 1;
     }
   },
@@ -120,6 +127,7 @@ export default {
 
 .shared-card {
   position: absolute;
+  pointer-events: none;
   top: 0;
   right: 0;
   width: 100%;
