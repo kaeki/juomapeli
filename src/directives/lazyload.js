@@ -1,6 +1,4 @@
-import Vue from 'vue';
-
-Vue.directive('lazyload', {
+export default {
   inserted: (el) => {
     if ('IntersectionObserver' in window) {
       const imageObserver = new IntersectionObserver((entries) => {
@@ -18,4 +16,4 @@ Vue.directive('lazyload', {
       el.src = el.dataset.src;
     }
   }
-});
+};
