@@ -1,67 +1,58 @@
 <template>
-  <div>
-    <h1>Pelipeli</h1>
-    <template v-if="cards.length > 0 && cardBack && !cardsError">
-      <div>
-        <button @click="shuffle">{{shuffleText}}</button>
-      </div>
-      <div v-if="shuffledCards.length > 0" class="game">
-        <button class="share-card-button" @click="shareCard">
-          <Card :back="cardBack" />
+  <div class="wrapper">
+    <div class="info">
+      <div class="info__box">
+        <button v-if="sharedCards.length > 0"
+          class="button"
+          @click="shuffle">
+          Uusi peli
         </button>
-        <CardFlippingAnimation>
-          <Card
-            v-for="(card, index) in sharedCards"
-            class="shared-card"
-            :key="card.meta.generation"
-            :face="card"
-            :back="cardBack"
-            :style="{ 'z-index': index }"/>
-        </CardFlippingAnimation>
       </div>
-    </template>
-    <template v-else-if="cardsError">
-      <p>VIRHE! Kortit ovat hukassa <span aria-hidden="true">🆘</span></p>
-    </template>
-    <template v-else>
-      <Loader />
-    </template>
-
+      <div class="info__box">
+        <p>{{sharedCards.length}}/{{cards.length}}</p>
+      </div>
+    </div>
+    <div v-if="shuffledCards.length > 0" class="game">
+      <button class="share-card-button" @click="shareCard">
+        <Card :back="cardBack" />
+      </button>
+      <CardFlippingAnimation>
+        <Card
+          v-for="(card, index) in sharedCards"
+          class="shared-card"
+          :key="card.meta.generation"
+          :face="card"
+          :back="cardBack"
+          :style="{ 'z-index': index }"/>
+      </CardFlippingAnimation>
+    </div>
   </div>
 </template>
 
 <script>
-import Loader from '@/components/Loader';
 import Card from '@/components/Card';
 import CardFlippingAnimation from '@/components/CardFlippingAnimation';
 
 export default {
   components: {
-    Loader,
     Card,
     CardFlippingAnimation
+  },
+  props: {
+    cards: {
+      type: Array,
+      required: true
+    },
+    cardBack: {
+      type: Object,
+      required: true
+    }
   },
   data() {
     return {
       shuffledCards: [],
       sharedCards: [],
       nextCardIndex: 0
-    }
-  },
-  computed: {
-    cardsError() {
-      return this.$root.$data.state.cardsError;
-    },
-    cardBack() {
-      return this.$root.$data.state.cardBacks[0] || null;
-    },
-    cards() {
-      return this.$root.$data.state.cards;
-    },
-    shuffleText() {
-      return this.shuffledCards.length > 0
-        ? 'Sekoita uudelleen'
-        : 'Sekoita pakka'
     }
   },
   methods: {
@@ -82,11 +73,28 @@ export default {
       this.sharedCards.push(newCard);
       this.nextCardIndex = this.nextCardIndex + 1;
     }
+  },
+  mounted() {
+    this.shuffle();
   }
 }
 </script>
 
 <style lang="scss" scoped>
+.info {
+  display: flex;
+  align-items: center;
+  min-height: 4rem;
+
+  &__box {
+    flex: 1 1 50%;
+  }
+
+  p {
+    margin: 0;
+  }
+}
+
 .game {
   margin: 3rem auto;
   padding: 2rem 1rem;
