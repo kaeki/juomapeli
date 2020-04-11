@@ -2,20 +2,17 @@
   <div class="wrapper">
     <div class="info">
       <div class="info__box">
-        <button v-if="sharedCards.length > 0"
-          class="button"
-          title=""
-          @click="shuffle">
-          Uusi peli
+        <button class="button" @click="shuffle">
+          Sekoita pakka
         </button>
       </div>
       <div class="info__box">
-        <p>{{nextCardIndex}}/{{cards.length}}</p>
+        <p>{{nextCardIndex}}/{{shuffledCards.length}}</p>
       </div>
     </div>
     <div v-if="shuffledCards.length > 0" class="game">
       <button
-        v-if="sharedCards.length !== cards.length"
+        v-if="sharedCards.length !== shuffledCards.length"
         class="share-card-button"
         title="Jaa uusi kortti"
         @click="shareCard">
