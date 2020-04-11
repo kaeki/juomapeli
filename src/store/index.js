@@ -4,12 +4,17 @@ const store = {
   debug: true,
   state: {
     cards: [],
+    cardBacks: [],
     cardsError: false
   },
   fetchCards() {
-    const cardFaces = storage.ref('card-faces');
+    this.fetchCardsRequest('card-faces', this.state.cards);
+    this.fetchCardsRequest('card-backs', this.state.cardBacks);
+  },
+  fetchCardsRequest(ref) {
+    const cardsRef = storage.ref(ref);
     
-    cardFaces.listAll()
+    cardsRef.listAll()
       .then(res => {
         return res.items.map(async itemRef => {
           const src = await itemRef.getDownloadURL();
@@ -20,11 +25,12 @@ const store = {
       .then(newCards => {
         Promise.all(newCards)
           .then(values => {
-            this.state.cards = values;
+            if (ref === 'card-faces') this.state.cards = values;
+            else this.state.cardBacks = values;
           });
       })
       .catch(error => {
-        this.cardsError = true;
+        this.state.cardsError = true;
         console.log(error);
       });
   },
