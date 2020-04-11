@@ -1,10 +1,10 @@
 <template>
   <div class="card">
     <div class="card__face card__face--back">
-      <img :src="back.src" alt="">
+      <img :data-src="back.src" :alt="alts ? back.meta.name : null" v-lazyload>
     </div>
     <div v-if="face" class="card__face card__face--front">
-      <img :src="face.src" alt="">
+      <img :data-src="face.src" :alt="alts ? face.meta.name : null" v-lazyload>>
     </div>
   </div>
 </template>
@@ -18,6 +18,10 @@ export default {
     },
     face: {
       type: Object,
+    },
+    alts: {
+      type: Boolean,
+      default: false
     }
   }
 }
