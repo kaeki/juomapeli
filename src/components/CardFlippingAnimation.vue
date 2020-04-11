@@ -13,7 +13,7 @@ export default {
   methods: {
     randomMax(max) {
       const random = Math.floor(Math.random() * max);
-      return Math.random > .5 ? random * -1 : random;
+      return Math.random() > .5 ? random * -1 : random;
     },
     beforeEnter: function (el) {
       el.style.transform = `rotateZ(0deg) rotateY(0) translateY(0)`;
@@ -25,7 +25,7 @@ export default {
       const top = this.randomMax(5);
 
       el.style.left = `calc(100% - ${el.offsetWidth}px)`;
-      el.style.transform = `rotateZ(${z}deg) rotateY(180deg) translateY(${top}px)`;
+      el.style.transform = `rotateY(180deg) rotateZ(${z}deg) translateY(${top}px)`;
     }
   }
 }
