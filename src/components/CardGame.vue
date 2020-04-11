@@ -9,14 +9,15 @@
         <button class="share-card-button" @click="shareCard">
           <Card :back="cardBack" />
         </button>
-
-        <Card
-          v-for="(card, index) in sharedCards"
-          class="shared-card flipped"
-          :key="card.meta.generation"
-          :face="card"
-          :back="cardBack"
-          :style="{ 'z-index': index }"/>
+        <CardFlippingAnimation>
+          <Card
+            v-for="(card, index) in sharedCards"
+            class="shared-card"
+            :key="card.meta.generation"
+            :face="card"
+            :back="cardBack"
+            :style="{ 'z-index': index }"/>
+        </CardFlippingAnimation>
       </div>
     </template>
     <template v-else-if="cardsError">
@@ -32,11 +33,13 @@
 <script>
 import Loader from '@/components/Loader';
 import Card from '@/components/Card';
+import CardFlippingAnimation from '@/components/CardFlippingAnimation';
 
 export default {
   components: {
     Loader,
-    Card
+    Card,
+    CardFlippingAnimation
   },
   data() {
     return {
