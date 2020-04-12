@@ -12,11 +12,15 @@
     </div>
     <div v-if="shuffledCards.length > 0" class="game">
       <button
-        v-if="sharedCards.length !== shuffledCards.length"
         class="share-card-button"
-        title="Jaa uusi kortti"
+        :title="allCardsShared ? 'Kortit loppuivat ;_;' : 'Jaa uusi kortti'"
+        :disabled="allCardsShared"
         @click="shareCard">
-        <Card :back="cardBack" :lazyload="false"/>
+        <div v-if="allCardsShared" class="fyll" />
+        <Card
+          v-else
+          :back="cardBack"
+          :lazyload="false"/>
       </button>
       <CardFlippingAnimation :fadeOut="cardFadeOut">
         <Card
@@ -62,6 +66,11 @@ export default {
       cardFadeOut: false
     }
   },
+  computed: {
+    allCardsShared() {
+      return this.nextCardIndex >= this.shuffledCards.length;
+    }
+  },
   methods: {
     shuffle() {
       const shuffled = [...this.cards];
@@ -79,11 +88,13 @@ export default {
       setTimeout(() => this.cardFadeOut = true, 1000);
     },
     shareCard() {
-      const newCard = this.cards[this.nextCardIndex];
-      const lastTenCards = this.sharedCards.slice(Math.max(this.sharedCards.length - 9, 0));
+      if (this.nextCardIndex < this.shuffledCards.length) {
+        const newCard = this.cards[this.nextCardIndex];
+        const lastTenCards = this.sharedCards.slice(Math.max(this.sharedCards.length - 9, 0));
 
-      this.sharedCards = [...lastTenCards, newCard];
-      this.nextCardIndex = this.nextCardIndex + 1;
+        this.sharedCards = [...lastTenCards, newCard];
+        this.nextCardIndex = this.nextCardIndex + 1;
+      }
     }
   },
   mounted() {
@@ -123,9 +134,16 @@ export default {
 .share-card-button {
   width: 100%;
   max-width: 400px;
-  padding: 0;
   border: 0;
+  padding: 0;
   cursor: pointer;
+  background-color: white;
+
+  .fyll {
+    content: " ";
+    display: block;
+    padding-bottom: 145%;
+  }
 }
 
 .shared-card {
