@@ -5,7 +5,7 @@
       @click="backToTop"
       class="back-to-top"
       title="Takaisin ylös">
-      <span aria-hidden="true" class="emoji">🔝</span>
+      <span aria-hidden="true" class="fa fa-arrow-up"></span>
       <span class="vis-hidden">Hyppää takaisin sivun yläreunaan</span>
     </button>
   </transition>
@@ -54,6 +54,7 @@ export default {
   right: 1rem;
   bottom: 2rem;
   font-size: 2rem;
+  color: var(--text-light);
   background-color: var(--accent);
   border: 0;
   box-shadow: 0 5px 12px rgba(0,0,0, .5);
@@ -63,11 +64,6 @@ export default {
   &:focus,
   &:active {
     background-color: var(--accent-dark);
-  }
-
-  .emoji {
-    color: transparent;
-    text-shadow: 0 0 0 white;
   }
 }
 </style>

@@ -3,11 +3,11 @@
     <div class="info">
       <div class="info__box">
         <button class="button" @click="shuffle">
-          Sekoita pakka
+          <span class="fa fa-random" aria-hidden="true"></span>Sekoita pakka
         </button>
       </div>
       <div class="info__box">
-        <p>{{nextCardIndex}}/{{shuffledCards.length}}</p>
+        <p>{{nextCardIndex}} / {{shuffledCards.length}}</p>
       </div>
     </div>
     <div v-if="shuffledCards.length > 0" class="game">
@@ -115,12 +115,18 @@ export default {
   }
 
   p {
+    font-weight: bold;
+    font-size: 1.2rem;
     margin: 0;
   }
 }
 
 .button {
   font-weight: bold;
+
+  .fa {
+    margin-right: .5rem;
+  }
 }
 
 .game {
