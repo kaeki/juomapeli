@@ -1,6 +1,10 @@
 <template>
   <transition-group :name="transitionName" tag="ul" ref="cardList">
-    <li v-for="card in lastFiveCards" :key="card.meta.generation">
+    <li
+      v-for="card in lastFiveCards"
+      :key="card.meta.generation"
+      @keyup="showCard"
+      @click="showCard">
       <Card :back="card" :alts="true"/>
     </li>
   </transition-group>
@@ -19,6 +23,11 @@ export default {
   components: {
     Card
   },
+  data() {
+    return {
+      cardModal: false
+    }
+  },
   watch: { 
     lastFiveCards: function() {
       const children = this.$refs.cardList.$children;
@@ -36,6 +45,22 @@ export default {
     },
     transitionName() {
       return this.cards.length === 0 ? 'new-game' : 'game-on';
+    }
+  },
+  methods: {
+    listener() {
+      this.showCard();
+    },
+    showCard(event) {
+      if (this.cardModal) {
+        this.cardModal.classList.remove('focused');
+        document.removeEventListener('keydown', this.listener);
+        this.cardModal = null;
+      } else {
+        this.cardModal = event.target;
+        this.cardModal.classList.add('focused');
+        document.addEventListener('keydown', this.listener);
+      }
     }
   }
 }
@@ -62,6 +87,7 @@ ul {
 }
 
 li {
+  cursor: pointer;
   flex-grow: 0;
   flex-shrink: 0;
   flex-basis: calc(20% - .75rem);
@@ -72,6 +98,36 @@ li {
 
   &:not(:last-child) {
     margin-right: 1rem;
+  }
+
+  &.focused {
+    &::before {
+      content: " ";
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0,0,0, .6);
+      backdrop-filter: blur(12px);
+      opacity: 1;
+      z-index: 998;
+    }
+
+    .card {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+      z-index: 999;
+      max-height: 577px;
+    }
+  }
+
+  .card {
+    pointer-events: none;
   }
 }
 
