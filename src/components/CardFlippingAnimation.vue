@@ -26,6 +26,7 @@ export default {
       el.style.transform = `rotateZ(0deg) rotateY(0) translateY(0)`;
       el.style.left = '1rem';
       el.style.transition = '1s';
+      el.style.pointerEvents = 'auto';
     },
     afterEnter(el) {
       const z = this.randomMax(5);
@@ -33,6 +34,7 @@ export default {
 
       el.style.left = `calc(100% - ${el.offsetWidth}px - 1rem)`;
       el.style.transform = `rotateY(180deg) rotateZ(${z}deg) translateY(${top}px)`;
+      el.style.pointerEvents = 'none';
     },
     leave(el) {
       if (this.fadeOut) {

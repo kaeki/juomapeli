@@ -6,7 +6,10 @@
           <span class="fa fa-random" aria-hidden="true"></span>Sekoita pakka
         </button>
       </div>
-      <div class="info__box">
+      <div class="info__box info__box--progress">
+        <span
+          class="progress"
+          :style="{ width: `${Math.floor(nextCardIndex / shuffledCards.length * 100)}%` }"/>
         <p>{{nextCardIndex}} / {{shuffledCards.length}}</p>
       </div>
     </div>
@@ -107,17 +110,46 @@ export default {
 .info {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   min-height: 4rem;
-  padding: 2rem 1rem;
+  padding: 2rem 1rem 0;
+
+  @media screen and (min-width: 800px) {
+    padding: 2rem 1rem;
+  }
 
   &__box {
-    flex: 1 1 50%;
+    flex: 0 0 100%;
+    margin: 0 0 1rem;
+
+    @media screen and (min-width: 800px) {
+      flex: 1 1 50%;
+      margin: auto;
+    }
+
+    &--progress {
+      position: relative;
+      overflow: hidden;
+      border-radius: 5px;
+      background-color: #ebebeb;
+    }
   }
 
   p {
+    position: relative;
     font-weight: bold;
     font-size: 1.2rem;
     margin: 0;
+    padding: .5rem 1rem;
+  }
+
+  .progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-color: var(--accent);
+    transition: width 1s ease-in;
   }
 }
 
