@@ -1,10 +1,16 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Juomapelin perkele</router-link> |
-      <router-link to="/kaikki-kortit">Selaa kortteja</router-link>
-    </div>
-    <router-view/>
+    <nav id="nav">
+      <router-link to="/">
+        <span aria-hidden="true">🍺</span> Juomapelin perkele
+      </router-link>
+      <router-link to="/kaikki-kortit">
+        <span aria-hidden="true">📜</span> Selaa kortteja
+      </router-link>
+    </nav>
+    <main>
+      <router-view/>
+    </main>
     <BackToTopButton />
   </div>
 </template>
@@ -35,18 +41,34 @@ export default {
   color: var(--text);
 }
 
-#nav {
-  padding: 30px;
+nav {
+  background-color: var(--accent-dark);
+  padding: .8rem 1rem;
+  box-shadow: 0 3px 4px rgba(0,0,0, .3);
 
   a {
+    display: inline-block;
     font-weight: bold;
-    color: var(--accent-dark);
+    color: var(--text-light);
+    text-decoration: none;
+    margin: .5rem 0;
+
+    &:not(:last-child) {
+      margin-right: 1.5rem;
+    }
 
     &.router-link-exact-active {
       color: var(--accent);
     }
+
+    &:hover,
+    &:focus {
+      text-decoration: underline;
+    }
   }
 }
 
-
+main {
+  padding: 0 1rem;
+}
 </style>
