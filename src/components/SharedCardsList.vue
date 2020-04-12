@@ -34,7 +34,8 @@ export default {
       
       if (children.length > 0) {
         setTimeout(() => {
-          children[children.length - 1].$el.scrollIntoView({ behavior: 'smooth' });
+          const scroll = children[children.length - 1].$el.offsetLeft;
+          this.$refs.cardList.$el.scrollLeft = scroll;
         }, 2000);
       }
     }
