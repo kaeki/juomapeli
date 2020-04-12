@@ -14,7 +14,7 @@
 footer {
   background-color: var(--accent-dark);
   color: var(--text-light);
-  padding: 1rem;
+  padding: .5rem 1rem;
   box-shadow: 0 -3px 5px rgba(0, 0, 0, 0.3);
 }
 
@@ -46,6 +46,7 @@ li {
   font-weight: bold;
   line-height: 1;
   border-radius: 5px;
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.3);
 
   &--github {
     background-color: #24292e;
