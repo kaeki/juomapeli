@@ -1,10 +1,10 @@
 <template>
   <nav id="nav">
     <router-link to="/">
-      <span aria-hidden="true">🍺</span> Juomapelin perkele
+      <span aria-hidden="true">🍺</span>Juomapeli
     </router-link>
     <router-link to="/kaikki-kortit">
-      <span aria-hidden="true">📜</span> Selaa kortteja
+      <span aria-hidden="true">📜</span>Selaa kortteja
     </router-link>
   </nav>
 </template>
@@ -22,8 +22,12 @@ nav {
     text-decoration: none;
     margin: .5rem 0;
 
+    span {
+      margin-right: .5rem;
+    }
+
     &:not(:last-child) {
-      margin-right: 1.5rem;
+      margin-right: 2rem;
     }
 
     &.router-link-exact-active {
