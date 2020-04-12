@@ -24,14 +24,14 @@ export default {
     },
     beforeEnter(el) {
       el.style.transform = `rotateZ(0deg) rotateY(0) translateY(0)`;
-      el.style.left = 0;
+      el.style.left = '1rem';
       el.style.transition = '1s';
     },
     afterEnter(el) {
       const z = this.randomMax(5);
       const top = this.randomMax(5);
 
-      el.style.left = `calc(100% - ${el.offsetWidth}px)`;
+      el.style.left = `calc(100% - ${el.offsetWidth}px - 1rem)`;
       el.style.transform = `rotateY(180deg) rotateZ(${z}deg) translateY(${top}px)`;
     },
     leave(el) {

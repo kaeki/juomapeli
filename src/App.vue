@@ -1,27 +1,26 @@
 <template>
   <div id="app">
-    <nav id="nav">
-      <router-link to="/">
-        <span aria-hidden="true">🍺</span> Juomapelin perkele
-      </router-link>
-      <router-link to="/kaikki-kortit">
-        <span aria-hidden="true">📜</span> Selaa kortteja
-      </router-link>
-    </nav>
+    <AppHeader class="header" />
     <main>
-      <router-view/>
+      <router-view />
     </main>
+    <AppFooter class="footer"/>
     <BackToTopButton />
   </div>
 </template>
 
 <script>
 import store from '@/store';
+
+import AppHeader from '@/components/AppHeader';
+import AppFooter from '@/components/AppFooter';
 import BackToTopButton from '@/components/BackToTopButton';
 
 export default {
   name: 'App',
   components: {
+    AppHeader,
+    AppFooter,
     BackToTopButton
   },
   mounted() {
@@ -34,41 +33,26 @@ export default {
 @import '@/assets/global';
 
 #app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: var(--text);
+  overflow: hidden;
 }
 
-nav {
-  background-color: var(--accent-dark);
-  padding: .8rem 1rem;
-  box-shadow: 0 3px 4px rgba(0,0,0, .3);
-
-  a {
-    display: inline-block;
-    font-weight: bold;
-    color: var(--text-light);
-    text-decoration: none;
-    margin: .5rem 0;
-
-    &:not(:last-child) {
-      margin-right: 1.5rem;
-    }
-
-    &.router-link-exact-active {
-      color: var(--accent);
-    }
-
-    &:hover,
-    &:focus {
-      text-decoration: underline;
-    }
-  }
+.header {
+  flex: 0;
 }
 
 main {
-  padding: 0 1rem;
+  flex: 1;
+}
+
+.footer {
+  flex: 0;
 }
 </style>

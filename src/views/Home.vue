@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    <h1>Pelipeli</h1>
     <template v-if="cards.length > 0 && cardBack && !cardsError">
       <CardGame :cards="cards" :cardBack="cardBack" />
     </template>

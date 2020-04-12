@@ -29,17 +29,20 @@
           :style="{ 'z-index': index + 1 }"/>
       </CardFlippingAnimation>
     </div>
+    <SharedCardsList :cards="sharedCards" />
   </div>
 </template>
 
 <script>
 import Card from '@/components/Card';
 import CardFlippingAnimation from '@/components/CardFlippingAnimation';
+import SharedCardsList from '@/components/SharedCardsList';
 
 export default {
   components: {
     Card,
-    CardFlippingAnimation
+    CardFlippingAnimation,
+    SharedCardsList
   },
   props: {
     cards: {
@@ -94,6 +97,7 @@ export default {
   display: flex;
   align-items: center;
   min-height: 4rem;
+  padding: 2rem 1rem;
 
   &__box {
     flex: 1 1 50%;
@@ -110,15 +114,13 @@ export default {
 
 .game {
   margin: 3rem auto;
-  padding: 2rem 1rem;
   position: relative;
   max-width: 1080px;
+  padding: 0 1rem;
+  text-align: left;
 }
 
 .share-card-button {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   max-width: 400px;
   padding: 0;
