@@ -104,6 +104,10 @@ export default {
   }
 }
 
+.button {
+  font-weight: bold;
+}
+
 .game {
   margin: 3rem auto;
   padding: 2rem 1rem;
