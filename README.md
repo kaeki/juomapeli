@@ -1,5 +1,9 @@
 # juomapeli
 
+A Simple card based game made with Vue.js
+
+![](example.gif)
+
 ## Project setup
 ```
 yarn install
