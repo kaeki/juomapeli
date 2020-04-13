@@ -14,7 +14,11 @@
       </div>
     </div>
     <div v-if="shuffledCards.length > 0" class="game">
-      <CardShuffleAnimation v-if="shuffling" :back="cardBack" :duration="shuffleDuration"/>
+      <CardShuffleAnimation
+        v-if="shuffling"
+        :back="cardBack"
+        :duration="shuffleDuration"
+        :count="shuffleCount"/>
       <button
         v-else
         class="share-card-button"
@@ -72,12 +76,16 @@ export default {
       nextCardIndex: 0,
       cardFadeOut: false,
       shuffling: false,
-      shuffleDuration: .7
+      shuffleDuration: .7,
+      shuffleCount: 3
     }
   },
   computed: {
     allCardsShared() {
       return this.nextCardIndex >= this.shuffledCards.length;
+    },
+    shuffleFullDuration() {
+      return ((this.shuffleDuration + (.3 * this.shuffleDuration)) * this.shuffleCount).toFixed(2);
     }
   },
   methods: {
@@ -89,16 +97,17 @@ export default {
           [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
       }
       
-      this.cardFadeOut = false;
+
       this.sharedCards = [];
       this.nextCardIndex = 0;
       this.shuffledCards = shuffled;
     },
     shuffle() {
+      this.cardFadeOut = false;
       this.shuffling = true;
 
       this.shuffleCards();
-      const timeOut = ((this.shuffleDuration + (.3 * this.shuffleDuration)) * 3).toFixed(2) * 1000;
+      const timeOut = this.shuffleFullDuration * 1000;
 
       setTimeout(() => {
         this.cardFadeOut = true
@@ -116,6 +125,7 @@ export default {
     }
   },
   mounted() {
+    this.cardFadeOut = true;
     this.shuffleCards();
   }
 }
@@ -177,7 +187,7 @@ export default {
 }
 
 .game {
-  margin: 2rem;
+  margin: 2rem 0 0;
   position: relative;
   max-width: 1080px;
   padding: 0 1rem;
@@ -189,17 +199,23 @@ export default {
 }
 
 .share-card-button {
-  width: 100%;
+  width: 80%;
   max-width: 400px;
   border: 0;
   padding: 0;
+  margin: 0;
   cursor: pointer;
   background-color: white;
+
+  &:focus {
+    outline: none;
+    border: 0;
+  }
 
   .fyll {
     content: " ";
     display: block;
-    padding-bottom: 145%;
+    padding-bottom: 140%;
   }
 }
 
@@ -208,7 +224,7 @@ export default {
   pointer-events: none;
   top: 0;
   right: 0;
-  width: calc(100% - 2rem);
+  width: calc(80% - 2rem);
   max-width: 400px;
 }
 </style>

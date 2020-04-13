@@ -44,6 +44,7 @@ export default {
   cursor: pointer;
   position: relative;
   box-shadow: 0 2px 4px rgba(0,0,0, .5);
+  background-color: black;
   border-radius: 25px;
   border: 5px solid white;
 

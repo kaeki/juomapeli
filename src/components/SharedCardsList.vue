@@ -30,10 +30,12 @@ export default {
     lastFiveCards: function() {
       const children = this.$refs.cardList.$children;
       
-      if (children.length > 0 && children[children.length - 1]) {
+      if (children.length > 0) {
         setTimeout(() => {
-          const scroll = children[children.length - 1].$el.offsetLeft;
-          this.$refs.cardList.$el.scrollLeft = scroll;
+          if (this.cards.length > 0) {
+            const scroll = children[children.length - 1].$el.offsetLeft;
+            this.$refs.cardList.$el.scrollLeft = scroll;
+          }
         }, 2000);
       }
     }
@@ -75,9 +77,7 @@ li {
   flex-basis: calc(20% - .75rem);
   min-width: 180px;
 
-  &:not(:last-child) {
-    margin-right: 1rem;
-  }
+    padding-right: 1rem;
 
   .card {
     pointer-events: none;

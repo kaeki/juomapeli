@@ -20,7 +20,6 @@ export default {
       default: 1
     },
     count: {
-      type: String || Number,
       default: 'infinite'
     }
   },
@@ -86,13 +85,14 @@ export default {
 .animate {
   position: relative;
   max-width: 400px;
+  width: 80%;
   height: auto;
 
   &::before {
     content: "";
     width: 100%;
     display: block;
-    padding-bottom: 140%;
+    padding-bottom: 144%;
   }
 
   .card {
@@ -102,10 +102,6 @@ export default {
     bottom: 0;
     left: 0;
     margin: 0;
-    transform-origin: center;
-    transform-style: preserve-3d;
-    border-radius: 25px;
-    border: 3px solid white;
     
     &:nth-child(1) {
       animation: shuffle-card-first ease-in-out;
