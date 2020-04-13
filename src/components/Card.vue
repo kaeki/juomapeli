@@ -13,6 +13,7 @@
 
 <script>
 export default {
+  name: 'Card',
   props: {
     back: {
       type: Object,

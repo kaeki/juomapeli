@@ -14,7 +14,9 @@
       </div>
     </div>
     <div v-if="shuffledCards.length > 0" class="game">
+      <CardShuffleAnimation v-if="shuffling" :back="cardBack" :duration="shuffleDuration"/>
       <button
+        v-else
         class="share-card-button"
         :title="allCardsShared ? 'Kortit loppuivat ;_;' : 'Jaa uusi kortti'"
         :disabled="allCardsShared"
@@ -43,12 +45,14 @@
 <script>
 import Card from '@/components/Card';
 import CardFlippingAnimation from '@/components/CardFlippingAnimation';
+import CardShuffleAnimation from '@/components/CardShuffleAnimation';
 import SharedCardsList from '@/components/SharedCardsList';
 
 export default {
   components: {
     Card,
     CardFlippingAnimation,
+    CardShuffleAnimation,
     SharedCardsList
   },
   props: {
@@ -66,7 +70,9 @@ export default {
       shuffledCards: [],
       sharedCards: [],
       nextCardIndex: 0,
-      cardFadeOut: false
+      cardFadeOut: false,
+      shuffling: false,
+      shuffleDuration: .7
     }
   },
   computed: {
@@ -75,7 +81,7 @@ export default {
     }
   },
   methods: {
-    shuffle() {
+    shuffleCards() {
       const shuffled = [...this.cards];
 
       for (let i = shuffled.length - 1; i > 0; i--) {
@@ -87,8 +93,17 @@ export default {
       this.sharedCards = [];
       this.nextCardIndex = 0;
       this.shuffledCards = shuffled;
+    },
+    shuffle() {
+      this.shuffling = true;
 
-      setTimeout(() => this.cardFadeOut = true, 1000);
+      this.shuffleCards();
+      const timeOut = ((this.shuffleDuration + (.3 * this.shuffleDuration)) * 3).toFixed(2) * 1000;
+
+      setTimeout(() => {
+        this.cardFadeOut = true
+        this.shuffling = false;
+      }, timeOut);
     },
     shareCard() {
       if (this.nextCardIndex < this.shuffledCards.length) {
@@ -101,7 +116,7 @@ export default {
     }
   },
   mounted() {
-    this.shuffle();
+    this.shuffleCards();
   }
 }
 </script>
