@@ -77,7 +77,9 @@ li {
   flex-basis: calc(20% - .75rem);
   min-width: 180px;
 
-    padding-right: 1rem;
+  &:not(:last-child) {
+    margin-right: 1rem;
+  }
 
   .card {
     pointer-events: none;
@@ -92,6 +94,7 @@ li {
 .game-on-leave-active {
   transition-delay: 2s;
 }
+
 .game-on-enter, .game-on-leave-to {
   opacity: 0;
   width: 0;
