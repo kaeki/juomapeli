@@ -1,6 +1,6 @@
 # juomapeli
 
-A Simple card based game made with Vue.js
+A Simple card based game made with Vue.js. Cards are hosted on Google Cloud Storage and fetched from there with Firebase sdk.
 
 ![](example.gif)
 
