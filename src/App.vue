@@ -5,7 +5,6 @@
       <router-view />
     </main>
     <AppFooter class="footer"/>
-    <BackToTopButton />
   </div>
 </template>
 
@@ -14,14 +13,12 @@ import store from '@/store';
 
 import AppHeader from '@/components/AppHeader';
 import AppFooter from '@/components/AppFooter';
-import BackToTopButton from '@/components/BackToTopButton';
 
 export default {
   name: 'App',
   components: {
     AppHeader,
-    AppFooter,
-    BackToTopButton
+    AppFooter
   },
   mounted() {
     store.fetchCards();

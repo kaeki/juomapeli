@@ -11,17 +11,20 @@
     <template v-else>
       <Loader />
     </template>
+    <BackToTopButton />
   </div>
 </template>
 
 <script>
 import CardsList from '@/components/CardsList';
 import Loader from '@/components/Loader';
+import BackToTopButton from '@/components/BackToTopButton';
 
 export default {
   components: {
     CardsList,
-    Loader
+    Loader,
+    BackToTopButton
   },
   computed: {
     state() {
@@ -30,3 +33,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.cards {
+  padding: 0 1rem;
+}
+</style>

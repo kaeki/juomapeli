@@ -177,11 +177,15 @@ export default {
 }
 
 .game {
-  margin: 3rem auto;
+  margin: 2rem;
   position: relative;
   max-width: 1080px;
   padding: 0 1rem;
   text-align: left;
+
+  @media screen and (min-width: 800px) {
+    margin: 3rem auto;
+  }
 }
 
 .share-card-button {
@@ -204,7 +208,7 @@ export default {
   pointer-events: none;
   top: 0;
   right: 0;
-  width: 100%;
+  width: calc(100% - 2rem);
   max-width: 400px;
 }
 </style>

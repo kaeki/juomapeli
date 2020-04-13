@@ -45,7 +45,7 @@ export default {
   position: relative;
   box-shadow: 0 2px 4px rgba(0,0,0, .5);
   border-radius: 25px;
-  border: 3px solid white;
+  border: 5px solid white;
 
   &::before {
     content: " ";
