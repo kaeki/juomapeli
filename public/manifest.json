@@ -1,8 +1,9 @@
 {
 	"name" : "Juomapeli",
 	"description" : "lol",
-	"start_url" : "/",
-	"display" : "standalone",
+  "start_url" : "/",
+  "scope": "/",
+  "display": "standalone",
   "orientation" : "portrait",
   "theme_color": "#2c3e50",
   "background_color": "#42b983",

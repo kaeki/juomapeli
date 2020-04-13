@@ -2,7 +2,11 @@
   <footer>
     <ul>
       <li>
-        <a href="https://github.com/kaeki/juomapeli" class="link-button link-button--github">
+        <a
+          href="https://github.com/kaeki/juomapeli"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="link-button link-button--github">
           <span class="fab fa-github icon"></span> Github
         </a>
       </li>
