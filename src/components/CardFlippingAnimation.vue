@@ -34,7 +34,6 @@ export default {
 
       el.style.left = `calc(100% - ${el.offsetWidth}px - 1rem)`;
       el.style.transform = `rotateY(180deg) rotateZ(${z}deg) translateY(${top}px)`;
-      el.style.pointerEvents = 'none';
     },
     leave(el) {
       if (this.fadeOut) {

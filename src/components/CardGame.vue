@@ -221,7 +221,6 @@ export default {
 
 .shared-card {
   position: absolute;
-  pointer-events: none;
   top: 0;
   right: 0;
   width: calc(80% - 2rem);
