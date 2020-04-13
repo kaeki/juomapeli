@@ -44,7 +44,7 @@ export default {
   cursor: pointer;
   position: relative;
   box-shadow: 0 2px 4px rgba(0,0,0, .5);
-  background-color: black;
+  background-color: white;
   border-radius: 25px;
   border: 5px solid white;
 
@@ -65,7 +65,7 @@ export default {
     bottom: 0;
     left: 0;
     margin: auto;
-    background-color: black;
+    background-color: white;
     backface-visibility: hidden;
     border-radius: 25px;
     overflow: hidden;
