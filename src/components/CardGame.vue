@@ -116,7 +116,7 @@ export default {
     },
     shareCard() {
       if (this.nextCardIndex < this.shuffledCards.length) {
-        const newCard = this.cards[this.nextCardIndex];
+        const newCard = this.shuffledCards[this.nextCardIndex];
         const lastTenCards = this.sharedCards.slice(Math.max(this.sharedCards.length - 9, 0));
 
         this.sharedCards = [...lastTenCards, newCard];
